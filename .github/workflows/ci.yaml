@@ -1,5 +1,8 @@
 name: product-catalouge-ci
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -58,7 +61,7 @@ jobs:
                 context: src/product-catalog
                 file: src/product-catalog/Dockerfile
                 push: true
-                tags: ${{ secrets.DOCKER_USERNAME }}/product-catalouge:${{ github.run_id }}
+                tags: ${{ secrets.DOCKER_USERNAME }}/product-catalog:${{ github.run_id }}
     update_k8s:
         runs-on: ubuntu-latest
         needs: Docker
