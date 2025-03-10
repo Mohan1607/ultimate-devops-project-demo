@@ -13,12 +13,17 @@ jobs:
               uses: actions/setup-go@v2
               with:
                go-version: 1.22
-            - name: install dependencies
-              run: go mod download src/product-catalog
-            - name: build
-              run: go build src/product-catalog main.go
-            - name: test
-              run: go test src/product-catalog
+            - name: Build
+              run: |
+                 cd src/product-catalog
+                 go mod download
+                 go build -o product-catalog-service main.go
+     
+            - name: unit tests
+              run: |
+                 cd src/product-catalog
+                 go test ./...
+         
     static_code_analysis:
         runs-on: ubuntu-latest
         steps:
